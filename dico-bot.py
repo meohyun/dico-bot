@@ -18,10 +18,6 @@ async def 봇(ctx):
     msg = ctx.message.content[3:]
     await ctx.send(msg)
 
-@bot.command()
-async def 종료(ctx):
-    await ctx.quit()
-
 @bot.event
 async def on_command_error(ctx,error):
     if isinstance(error,commands.CommandNotFound):
