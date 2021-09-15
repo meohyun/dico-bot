@@ -2,8 +2,7 @@ import discord
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!',help_command=None)
-token = ('ODg3NTc3MTQ3OTQwNzAwMjEw.YUGKog.rqmwApEu5jKxE-kTktjY7mDZmTs')
-
+token = ('토큰')
 async def on_ready():
     print(f'부팅 성공: {bot.user.name}!')
     game = discord.Game("Beta Ver")
