@@ -13,6 +13,11 @@ async def 안녕(ctx):
     await ctx.send("안녕하세요")
 
 @bot.command()
+@commands.is_owner()
+async def 종료(ctx):
+    exit()
+    
+@bot.command()
 async def 봇(ctx):
     msg = ctx.message.content[3:]
     await ctx.send(msg)
