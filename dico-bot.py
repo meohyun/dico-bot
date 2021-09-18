@@ -6,7 +6,6 @@ from foods_choice import foods
 
 bot = commands.Bot(command_prefix='!',help_command=None)
 token = ('토큰')
-    
 
 async def on_ready():
     print(f'부팅 성공: {bot.user.name}!')
@@ -27,6 +26,60 @@ async def 로또(ctx):
 @bot.command()
 async def 안녕(ctx):
     await ctx.send("안녕하세요")
+
+
+@bot.command()
+async def 숫자야구(ctx):
+    global three_numbers
+    three_numbers = random.sample(range(1,10),3)
+    await ctx.send("숫자야구 게임을 시작합니다!")
+
+@bot.command()
+async def 답(ctx,*args):
+
+    s = 0
+    b = 0
+    quoto_1 = int(args[0]) 
+    quoto_2 = int(args[1])
+    quoto_3 = int(args[2])
+   
+   # 입력한 수 중 1개가 숫자와 위치가같다면 - 1strike
+    if quoto_1== three_numbers[0]:
+        s = 1
+        # 입력한 수 중 2개가 숫자와 위치가 같다면 - 2strike
+        if quoto_2 == three_numbers[1]:
+            s = 2
+            # 입력한 수 중 3개가 숫자와 위치가 같다면 - success
+            if quoto_3 == three_numbers[2]: 
+                s = 3
+                await ctx.send("정답입니다!")
+                
+        elif quoto_3 == three_numbers[2]:
+            s = 2
+    elif quoto_2==three_numbers[1]:
+        s = 1
+        if quoto_3 == three_numbers[2]:
+            s = 2
+    elif quoto_3 == three_numbers[2]:
+        s = 1
+    
+    # 입력한 수가 위치는 다르지만 숫자가 같다면 - 1BALL
+    if not quoto_1 == three_numbers[0] and quoto_1 in three_numbers :
+        b = 1
+        if not quoto_2 == three_numbers[1] and quoto_2 in three_numbers :
+            b= 2
+            if not quoto_3 == three_numbers[2] and quoto_3 in three_numbers :
+                b= 3
+        elif not quoto_3 == three_numbers[2] and quoto_3 in three_numbers :
+            b= 2
+    elif not quoto_2 == three_numbers[1] and quoto_2 in three_numbers :
+        b = 1
+        if not quoto_3 == three_numbers[2] and quoto_3 in three_numbers :
+            b= 2
+    elif not quoto_3 == three_numbers[2] and quoto_3 in three_numbers :
+        b = 1
+    
+    await ctx.send("{} 스트라이크 {}볼".format(s,b))
 
 @bot.command()
 @commands.is_owner()
