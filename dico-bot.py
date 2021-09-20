@@ -10,13 +10,14 @@ from foods_choice import foods
 
 client = discord.Client()
 bot = commands.Bot(command_prefix='!',help_command=None)
-token = ('your Token')
-lol_api_key = 'your API'
+token = ('')
+lol_api_key = ''
 
 async def on_ready():
     print(f'부팅 성공: {bot.user.name}!')
     game = discord.Game("Beta Ver")
     await bot.change.presence(status = discord.Status.online,activity = game)
+
 
 @client.event
 async def on_message(message):
@@ -57,16 +58,6 @@ async def on_message(message):
             await message.channel.send(embed=error)
 
 client.run(token)
-
-
-@client.command()
-async def search_champion(message):
-    if message.content.startswith("/챔피언 "):
-        message.content.replace("/챔피언 ","")
-
-        Champion_Url = "https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}"
-        req = requests.get(Champion_Url,headers={"X-Riot-Token":lol_api_key})
-        req_json = json.loads(req.text)
 
 @bot.command()
 async def 로또(ctx):
