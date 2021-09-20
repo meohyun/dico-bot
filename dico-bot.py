@@ -4,8 +4,6 @@ import random
 import time
 import requests
 import json
-
-from requests.api import head
 from foods_choice import foods 
 
 client = discord.Client()
